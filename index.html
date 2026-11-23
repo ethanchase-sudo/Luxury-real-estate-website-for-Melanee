@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melanee | Real Estate — Finding Your Place in the World</title>
+<meta name="description" content="Melanee is a boutique real estate advisor offering personalized guidance for buying and selling distinctive homes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F7F3ED; --sand:#EDE5DA; --stone:#DCD1C3; --taupe:#A6957F; --clay:#8B6F55;
+  --ink:#1F1D1A; --ink-2:#4A453F; --mute:#7C756C; --line:rgba(31,29,26,.14);
+  --serif:'Cormorant Garamond', Georgia, serif; --sans:'Jost', 'Helvetica Neue', sans-serif;
+  --pad:clamp(20px,5vw,80px); --max:1440px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:300;line-height:1.08;letter-spacing:-.01em}
+em{font-style:italic}
+p{text-wrap:pretty}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.eyebrow{font-family:var(--sans);font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;font-weight:400;color:var(--clay)}
+.eyebrow.light{color:rgba(255,255,255,.82)}
+.h-xl{font-size:clamp(46px,7.4vw,118px)}
+.h-lg{font-size:clamp(38px,5vw,76px)}
+.h-md{font-size:clamp(30px,3.4vw,50px)}
+.lead{font-size:clamp(17px,1.35vw,20px);color:var(--ink-2);max-width:56ch}
+section{position:relative}
+.sec{padding:clamp(80px,11vw,160px) 0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:14px;padding:17px 30px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;border:1px solid var(--ink);background:var(--ink);color:var(--ivory);cursor:pointer;transition:background .4s,color .4s,border-color .4s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--ivory)}
+.btn.light{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.btn.light:hover{background:transparent;color:var(--ivory)}
+.btn.ghost-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn.ghost-light:hover{background:#fff;color:var(--ink);border-color:#fff}
+.link{display:inline-flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;padding-bottom:6px;border-bottom:1px solid currentColor;cursor:pointer;transition:gap .35s}
+.link:hover{gap:20px}
+.arrow{display:inline-block;width:22px;height:1px;background:currentColor;position:relative}
+.arrow:after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+
+/* header */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .5s,color .5s,padding .5s,border-color .5s;color:#fff;border-bottom:1px solid rgba(255,255,255,.18)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:92px;transition:height .5s}
+.hdr.solid{background:rgba(247,243,237,.96);backdrop-filter:blur(10px);color:var(--ink);border-color:var(--line)}
+.hdr.solid .wrap{height:72px}
+.logo{display:flex;flex-direction:column;line-height:1;cursor:pointer}
+.logo b{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:.34em}
+.logo small{font-size:9px;letter-spacing:.5em;text-transform:uppercase;margin-top:6px;opacity:.8}
+.nav{display:flex;gap:clamp(18px,2.4vw,40px);align-items:center}
+.nav a{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;position:relative;padding:6px 0;cursor:pointer}
+.nav a:after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:currentColor;transition:right .4s}
+.nav a:hover:after,.nav a.on:after{right:0}
+.nav .cta{border:1px solid currentColor;padding:11px 20px}
+.nav .cta:after{display:none}
+.burger{display:none;background:none;border:0;width:34px;height:20px;position:relative;cursor:pointer}
+.burger span{position:absolute;left:0;right:0;height:1px;background:currentColor;transition:.4s}
+.burger span:nth-child(1){top:2px}.burger span:nth-child(2){top:10px}.burger span:nth-child(3){top:18px}
+.mnav{position:fixed;inset:0;background:var(--ink);color:var(--ivory);z-index:60;display:flex;flex-direction:column;justify-content:center;padding:var(--pad);gap:6px;opacity:0;pointer-events:none;transition:opacity .5s}
+.mnav.open{opacity:1;pointer-events:auto}
+.mnav a{font-family:var(--serif);font-size:44px;font-weight:300;cursor:pointer}
+.mnav .x{position:absolute;top:28px;right:var(--pad);background:none;border:0;color:inherit;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;cursor:pointer}
+.mnav .meta{margin-top:40px;font-size:13px;opacity:.6;letter-spacing:.1em}
+
+/* page */
+.page{display:none}
+.page.on{display:block;animation:pageIn .8s ease both}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+
+/* hero */
+.hero{height:100vh;min-height:640px;color:#fff;overflow:hidden;display:flex;align-items:flex-end}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{animation:kb 18s ease-out both}
+@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,15,.45) 0%,rgba(20,18,15,.05) 35%,rgba(20,18,15,.25) 60%,rgba(20,18,15,.7) 100%)}
+.hero .wrap{position:relative;width:100%;padding-bottom:clamp(56px,9vh,110px)}
+.hero h1{max-width:13ch;margin:22px 0 28px}
+.hero h1 em{font-weight:300}
+.hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.hero p{max-width:44ch;font-size:17px;color:rgba(255,255,255,.88)}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.scroll-cue{position:absolute;right:var(--pad);bottom:40px;writing-mode:vertical-rl;font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;display:flex;align-items:center;gap:14px;opacity:.8}
+.scroll-cue:after{content:"";width:1px;height:60px;background:#fff;animation:cue 2.4s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero .rise{opacity:0;transform:translateY(30px);animation:rise 1.2s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* sub hero */
+.shero{height:78vh;min-height:520px;color:#fff;overflow:hidden;display:flex;align-items:flex-end}
+.shero .bg{position:absolute;inset:0}
+.shero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,15,.4),rgba(20,18,15,.1) 40%,rgba(20,18,15,.6))}
+.shero .wrap{position:relative;width:100%;padding-bottom:72px}
+.shero h1{margin-top:18px;max-width:16ch}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}
+.imgrv{overflow:hidden}
+.imgrv img{transform:scale(1.15);transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.imgrv.in img{transform:scale(1)}
+
+/* intro */
+.intro{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,120px);align-items:center}
+.intro .ph{aspect-ratio:4/5;position:relative}
+.intro .ph .tag{position:absolute;left:-1px;bottom:-1px;background:var(--ivory);padding:22px 28px 0 0;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink-2)}
+.intro h2{margin:22px 0 30px}
+.intro .sig{font-family:var(--serif);font-style:italic;font-size:34px;margin:34px 0 36px;color:var(--clay)}
+.statement{text-align:center;max-width:980px;margin:0 auto}
+.statement p{font-family:var(--serif);font-size:clamp(28px,3.2vw,46px);line-height:1.25;font-weight:300;color:var(--ink)}
+.statement p em{color:var(--clay)}
+
+/* listings */
+.sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(40px,5vw,72px);flex-wrap:wrap}
+.sechead h2{margin-top:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.4vw,40px)}
+.card{cursor:pointer}
+.card .ph{aspect-ratio:4/5;overflow:hidden;position:relative;background:var(--sand)}
+.card .ph img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.card:hover .ph img{transform:scale(1.06)}
+.card .badge{position:absolute;top:18px;left:18px;background:rgba(247,243,237,.94);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;padding:8px 13px;font-weight:400}
+.card .view{position:absolute;inset:auto 0 0 0;padding:20px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:11px;letter-spacing:.26em;text-transform:uppercase;background:linear-gradient(transparent,rgba(20,18,15,.55));opacity:0;transform:translateY(10px);transition:.5s}
+.card:hover .view{opacity:1;transform:none}
+.card .meta{padding-top:22px}
+.card .loc{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+.card h3{font-size:30px;margin:8px 0 10px}
+.card .row{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:14px;margin-top:14px;gap:10px;flex-wrap:wrap}
+.card .price{font-family:var(--serif);font-size:24px}
+.card .specs{font-size:13px;color:var(--ink-2);letter-spacing:.04em}
+.card .specs span+span:before{content:"·";margin:0 8px;color:var(--taupe)}
+
+/* services */
+.services{background:var(--sand)}
+.svc{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.svc-list{display:flex;flex-direction:column}
+.svc-item{border-bottom:1px solid var(--line);padding:34px 0;cursor:pointer;display:grid;grid-template-columns:70px 1fr 30px;gap:14px;align-items:start;transition:padding .5s}
+.svc-item .n{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--taupe)}
+.svc-item h3{font-size:clamp(28px,2.6vw,40px)}
+.svc-item p{max-height:0;overflow:hidden;opacity:0;transition:max-height .6s,opacity .6s,margin .6s;color:var(--ink-2);max-width:46ch}
+.svc-item.on p{max-height:200px;opacity:1;margin-top:14px}
+.svc-item .pl{font-size:22px;font-weight:300;transition:transform .5s;color:var(--clay)}
+.svc-item.on .pl{transform:rotate(45deg)}
+.svc-img{position:relative;margin-left:clamp(30px,5vw,90px);min-height:520px}
+.svc-img img{position:absolute;inset:0;opacity:0;transition:opacity 1s}
+.svc-img img.on{opacity:1}
+
+/* lifestyle */
+.life{height:92vh;min-height:560px;overflow:hidden;color:#fff;display:flex;align-items:center}
+.life .bg{position:absolute;inset:-12% 0;will-change:transform}
+.life .shade{position:absolute;inset:0;background:rgba(20,18,15,.38)}
+.life .wrap{position:relative;text-align:center}
+.life h2{max-width:18ch;margin:22px auto 26px}
+.life p{max-width:52ch;margin:0 auto 36px;color:rgba(255,255,255,.88)}
+.duo{display:grid;grid-template-columns:7fr 5fr;gap:clamp(24px,4vw,64px);align-items:end}
+.duo .a{aspect-ratio:7/5}.duo .b{aspect-ratio:4/5}
+.duo-text{display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);margin-top:clamp(40px,5vw,70px)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.pillars h4{font-size:24px;margin-bottom:8px}
+.pillars p{font-size:15px;color:var(--ink-2)}
+
+/* testimonials */
+.testi{text-align:center}
+.tq{font-family:var(--serif);font-size:120px;line-height:.5;color:var(--stone);height:50px;margin-top:30px}
+.tslides{position:relative;max-width:900px;margin:0 auto;min-height:240px}
+.tslide{position:absolute;inset:0;opacity:0;transition:opacity .8s;pointer-events:none}
+.tslide.on{opacity:1;pointer-events:auto}
+.tslide blockquote{font-family:var(--serif);font-size:clamp(24px,2.6vw,36px);line-height:1.35;font-weight:300;font-style:italic;color:var(--ink-2)}
+.tslide .who{margin-top:30px;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+.placeholder-note{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.14em;color:var(--taupe);border:1px dashed var(--stone);padding:6px 12px}
+.tdots{display:flex;gap:12px;justify-content:center;margin-top:44px}
+.tdots button{width:36px;height:2px;border:0;background:var(--stone);cursor:pointer;transition:background .4s}
+.tdots button.on{background:var(--ink)}
+
+/* contact */
+.contact{background:var(--ink);color:var(--ivory)}
+.contact .eyebrow{color:var(--taupe)}
+.cgrid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,120px)}
+.contact h2{margin:22px 0 26px}
+.contact .lead{color:rgba(247,243,237,.7)}
+.cinfo{margin-top:46px;display:grid;gap:22px}
+.cinfo div{border-top:1px solid rgba(247,243,237,.16);padding-top:16px}
+.cinfo small{display:block;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:34px 30px}
+.form .full{grid-column:1/-1}
+.field{position:relative}
+.field input,.field textarea,.field select{width:100%;background:transparent;border:0;border-bottom:1px solid currentColor;padding:14px 0 12px;outline:none;font-size:16px;border-color:rgba(127,120,110,.5);transition:border-color .3s;border-radius:0}
+.field select{appearance:none;cursor:pointer}
+.field select option{color:var(--ink)}
+.field textarea{resize:vertical;min-height:110px}
+.field label{position:absolute;left:0;top:14px;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;pointer-events:none;transition:.3s;opacity:.65}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--taupe)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label,.field select+label{top:-12px;font-size:10px;opacity:.9;color:var(--taupe)}
+.field.err input,.field.err textarea{border-color:#C0846A}
+.field .em{position:absolute;right:0;top:-12px;font-size:10.5px;letter-spacing:.1em;color:#C0846A;opacity:0;transition:.3s}
+.field.err .em{opacity:1}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chips label{position:static;opacity:1;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.chips input{display:none}
+.chips span{display:inline-block;padding:10px 16px;border:1px solid rgba(127,120,110,.5);transition:.3s}
+.chips input:checked+span{background:var(--taupe);border-color:var(--taupe);color:var(--ink)}
+.ok{display:none;padding:50px 0}
+.ok h3{font-size:44px;margin-bottom:14px}
+.sent .form{display:none}.sent .ok{display:block}
+.light-form .field input,.light-form .field textarea,.light-form .field select{border-color:rgba(31,29,26,.3)}
+.light-form .chips span{border-color:rgba(31,29,26,.3)}
+.light-form .field label{color:var(--ink)}
+.light-form .field input:focus+label,.light-form .field input:not(:placeholder-shown)+label,.light-form .field textarea:focus+label,.light-form .field textarea:not(:placeholder-shown)+label,.light-form .field select+label{color:var(--clay)}
+
+/* footer */
+.ftr{background:var(--ivory);padding:90px 0 40px;border-top:1px solid var(--line)}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px}
+.ftr h5{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;color:var(--clay);margin-bottom:20px}
+.ftr ul{list-style:none;display:grid;gap:10px;font-size:14.5px}
+.ftr ul a{cursor:pointer;transition:color .3s}.ftr ul a:hover{color:var(--clay)}
+.ftr .logo{color:var(--ink);margin-bottom:24px}
+.ftr .blurb{font-size:14.5px;color:var(--ink-2);max-width:34ch}
+.social{display:flex;gap:10px;margin-top:22px}
+.social a{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:.35s}
+.social a:hover{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.social svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.4}
+.fbot{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:12px;color:var(--mute);letter-spacing:.06em;flex-wrap:wrap}
+.bigmark{font-family:var(--serif);font-weight:300;font-size:clamp(70px,17vw,280px);letter-spacing:.12em;line-height:.9;color:var(--sand);text-align:center;margin-top:70px;user-select:none;white-space:nowrap;overflow:hidden}
+
+/* about page */
+.about-hero{padding-top:160px}
+.ab-grid{display:grid;grid-template-columns:6fr 5fr;gap:clamp(40px,7vw,120px);align-items:end}
+.ab-grid .ph{aspect-ratio:4/5}
+.ab-grid h1{margin:22px 0 30px}
+.values{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.values > div{padding:46px 40px 10px 0;border-right:1px solid var(--line)}
+.values > div+div{padding-left:40px}
+.values > div:last-child{border-right:0}
+.values .n{font-family:var(--serif);font-style:italic;color:var(--taupe);font-size:20px}
+.values h3{font-size:32px;margin:16px 0 14px}
+.values p{color:var(--ink-2);font-size:15.5px}
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.split .ph{min-height:420px}
+.split .txt{padding:clamp(50px,8vw,130px) var(--pad);display:flex;flex-direction:column;justify-content:center;background:var(--sand)}
+.split .txt h2{margin:20px 0 26px}
+.split .txt p+p{margin-top:16px}
+
+/* listings page */
+.filters{display:flex;gap:10px 30px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;margin-bottom:60px}
+.ftabs{display:flex;gap:28px;flex-wrap:wrap}
+.ftabs button{background:none;border:0;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;padding:6px 0;color:var(--mute);border-bottom:1px solid transparent;transition:.3s}
+.ftabs button.on,.ftabs button:hover{color:var(--ink);border-color:var(--ink)}
+.fsel{display:flex;gap:24px;align-items:center;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.fsel select{background:transparent;border:0;border-bottom:1px solid var(--line);padding:6px 22px 6px 0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;color:var(--ink);outline:none}
+.count{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink-2)}
+.empty{grid-column:1/-1;text-align:center;padding:80px 0;font-family:var(--serif);font-size:28px;color:var(--mute)}
+
+/* process */
+.process{counter-reset:p}
+.step{display:grid;grid-template-columns:140px 1fr 1.2fr;gap:30px;padding:46px 0;border-top:1px solid var(--line);align-items:baseline}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{font-family:var(--serif);font-size:56px;font-weight:300;color:var(--taupe);line-height:1}
+.step h3{font-size:clamp(28px,2.6vw,38px)}
+.step p{color:var(--ink-2)}
+.band{background:var(--sand);text-align:center}
+.band h2{max-width:20ch;margin:20px auto 34px}
+.feature3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px)}
+.feature3 .ph{aspect-ratio:3/4;margin-bottom:24px}
+.feature3 h3{font-size:30px;margin-bottom:10px}
+.feature3 p{color:var(--ink-2);font-size:15.5px}
+.val-wrap{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,120px);align-items:start}
+
+/* contact page */
+.cp{padding-top:170px}
+.cp-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,120px)}
+.cp h1{margin:22px 0 28px}
+.cp .ph{aspect-ratio:16/10;margin-top:50px}
+.cp .cinfo div{border-color:var(--line)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:80;background:var(--ivory);overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .5s}
+.modal.open{opacity:1;pointer-events:auto}
+.mbar{position:sticky;top:0;z-index:2;background:rgba(247,243,237,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.mbar .wrap{height:72px;display:flex;align-items:center;justify-content:space-between}
+.mclose{background:none;border:0;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;cursor:pointer;display:flex;gap:12px;align-items:center}
+.gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:min(78vh,760px);margin-top:30px}
+.gal div{overflow:hidden;cursor:pointer;background:var(--sand)}
+.gal div:first-child{grid-row:1/3}
+.gal img{transition:transform 1.2s}.gal div:hover img{transform:scale(1.04)}
+.mbody{display:grid;grid-template-columns:7fr 4fr;gap:clamp(40px,6vw,100px);padding:60px 0 120px}
+.mbody h2{margin:14px 0 8px}
+.mprice{font-family:var(--serif);font-size:34px;color:var(--clay)}
+.mspecs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:40px 0}
+.mspecs div{padding:24px 0;text-align:center;border-right:1px solid var(--line)}
+.mspecs div:last-child{border:0}
+.mspecs b{display:block;font-family:var(--serif);font-weight:300;font-size:34px;line-height:1.1}
+.mspecs small{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+.mfeat{columns:2;gap:40px;margin-top:30px;list-style:none}
+.mfeat li{padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;break-inside:avoid}
+.aside{position:sticky;top:110px;align-self:start;background:var(--sand);padding:40px}
+.aside .agent{display:flex;gap:16px;align-items:center;margin-bottom:28px}
+.aside .agent .av{width:64px;height:64px;border-radius:50%;overflow:hidden;flex:none}
+.aside .agent b{font-family:var(--serif);font-weight:400;font-size:24px;display:block;line-height:1.1}
+.aside .form{grid-template-columns:1fr;gap:28px}
+.aside .btn{width:100%;justify-content:center}
+
+/* responsive */
+@media (max-width:1080px){
+  .nav{display:none}.burger{display:block}
+  .grid3,.feature3{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .step{grid-template-columns:90px 1fr}
+  .step p{grid-column:2}
+  .mbody{grid-template-columns:1fr}
+  .aside{position:static}
+}
+@media (max-width:800px){
+  .intro,.cgrid,.ab-grid,.split,.val-wrap,.cp-grid,.duo,.duo-text{grid-template-columns:1fr}
+  .svc{grid-template-columns:1fr}
+  .svc-img{margin:0 0 30px;min-height:340px;order:-1}
+  .grid3,.feature3,.pillars{grid-template-columns:1fr}
+  .values{grid-template-columns:1fr}
+  .values > div,.values > div+div{padding:36px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .form{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr;height:70vh}
+  .gal div:first-child{grid-row:auto;grid-column:1/-1}
+  .mspecs{grid-template-columns:1fr 1fr}
+  .mspecs div:nth-child(2){border-right:0}
+  .mspecs div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .mfeat{columns:1}
+  .scroll-cue{display:none}
+  .split .ph{order:-1}
+}
+@media (max-width:520px){
+  .fgrid{grid-template-columns:1fr}
+  .hero .ctas .btn{flex:1;justify-content:center}
+  .logo b{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.imgrv img{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" data-go="home" aria-label="Melanee Real Estate — Home"><b>MELANEE</b><small>Real Estate</small></a>
+    <nav class="nav" aria-label="Primary">
+      <a data-go="about">About</a>
+      <a data-go="properties">Properties</a>
+      <a data-go="buying">Buying</a>
+      <a data-go="selling">Selling</a>
+      <a data-go="contact" class="cta">Get in Touch</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <button class="x" id="mclose">Close ✕</button>
+  <a data-go="home">Home</a>
+  <a data-go="about">About Melanee</a>
+  <a data-go="properties">Properties</a>
+  <a data-go="buying">Buying</a>
+  <a data-go="selling">Selling</a>
+  <a data-go="contact">Contact</a>
+  <div class="meta"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a9a4adadae81aca4ada0afa4a4efa2aeac">[email&#160;protected]</a> &nbsp;·&nbsp; (000) 000-0000</div>
+</div>
+
+<!-- ================= HOME ================= -->
+<main class="page" data-page="home" data-screen-label="Home">
+  <section class="hero">
+    <div class="bg"><img src="img/c1.jpg" alt="Contemporary luxury residence at dusk with glowing windows and landscaped lawn"></div>
+    <div class="shade"></div>
+    <div class="wrap">
+      <div class="eyebrow light rise" style="animation-delay:.3s">Melanee &nbsp;—&nbsp; Boutique Real Estate Advisory</div>
+      <h1 class="h-xl rise" style="animation-delay:.5s">Finding your place <em>in the world.</em></h1>
+      <div class="row">
+        <div class="rise" style="animation-delay:.8s">
+          <p>Thoughtful guidance for buying and selling distinctive homes — rooted in local knowledge, honest counsel, and a genuine care for where you’ll live next.</p>
+          <div class="ctas">
+            <a class="btn light" data-go="properties">Explore Properties <span class="arrow"></span></a>
+            <a class="btn ghost-light" data-go="contact">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue">Scroll</div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap intro">
+      <div class="ph imgrv rv"><img src="img/c9.jpg" alt="Portrait of Melanee, real estate advisor"><div class="tag">Melanee</div></div>
+      <div>
+        <div class="eyebrow rv">Meet Melanee</div>
+        <h2 class="h-lg rv d1">Real estate, <em>done personally.</em></h2>
+        <p class="lead rv d2">Every move begins with a story — a growing family, a new chapter, a long-held dream. Melanee listens first, then brings clarity, market insight and calm negotiation to every step of the journey.</p>
+        <p class="lead rv d2" style="margin-top:18px">Her practice is intentionally small, so each client receives her full attention — from the first conversation to the day the keys change hands, and long after.</p>
+        <div class="sig rv d3">— Melanee</div>
+        <a class="link rv d3" data-go="about">Learn More About Melanee <span class="arrow"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sechead">
+        <div><div class="eyebrow rv">Featured Properties</div><h2 class="h-lg rv d1">Homes of <em>distinction</em></h2></div>
+        <a class="link rv d2" data-go="properties">View All Properties <span class="arrow"></span></a>
+      </div>
+      <div class="grid3" id="featured"></div>
+    </div>
+  </section>
+
+  <section class="sec services">
+    <div class="wrap">
+      <div class="sechead">
+        <div><div class="eyebrow rv">Services</div><h2 class="h-lg rv d1">How Melanee <em>can help</em></h2></div>
+        <p class="lead rv d2" style="max-width:42ch">A complete, considered approach — whether you’re searching, selling, or simply weighing your options.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-list" id="svcList">
+          <div class="svc-item on" data-i="0"><span class="n">01</span><div><h3>Buying a Property</h3><p>From defining what matters most to private showings and skilled negotiation, Melanee guides you to the right home — not just the available one.</p></div><span class="pl">+</span></div>
+          <div class="svc-item" data-i="1"><span class="n">02</span><div><h3>Selling a Property</h3><p>Strategic pricing, editorial-quality presentation and targeted marketing that positions your home to attract the right buyers at the right value.</p></div><span class="pl">+</span></div>
+          <div class="svc-item" data-i="2"><span class="n">03</span><div><h3>Property Consultation</h3><p>Clear, data-informed perspective on value, timing and market conditions — so every decision you make is a confident one.</p></div><span class="pl">+</span></div>
+          <div class="svc-item" data-i="3"><span class="n">04</span><div><h3>Personalized Guidance</h3><p>Relocation, downsizing, investment or a first home — a tailored plan and a trusted network of local professionals, built around you.</p></div><span class="pl">+</span></div>
+          <div style="padding-top:36px"><a class="btn ghost" data-go="contact">Book a Consultation <span class="arrow"></span></a></div>
+        </div>
+        <div class="svc-img" id="svcImg">
+          <img class="on" src="img/c11.jpg" alt="Bright double-height living room opening onto a garden">
+          <img src="img/c12.jpg" alt="Modern timber home in garden landscape at sunset">
+          <img src="img/c13.jpg" alt="Kitchen with green marble island">
+          <img src="img/c15.jpg" alt="Neutral living room with sculptural pendant lights">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="life">
+    <div class="bg" data-parallax><img src="img/c10.jpg" alt="Tree-lined residential street with mature oaks"></div>
+    <div class="shade"></div>
+    <div class="wrap">
+      <div class="eyebrow light rv">Lifestyle &amp; Local Expertise</div>
+      <h2 class="h-lg rv d1">A home is more than an address — <em>it’s a way of life.</em></h2>
+      <p class="rv d2">The morning walk to coffee. The school around the corner. Neighbours who wave. Melanee knows the streets, the rhythms and the quiet details that make a community feel like home.</p>
+      <a class="btn ghost-light rv d3" data-go="buying">Discover the Neighborhoods <span class="arrow"></span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="duo">
+        <div class="a imgrv rv"><img src="img/c6.jpg" alt="Calm living room with window seat and soft textiles"></div>
+        <div class="b imgrv rv d2"><img src="img/c14.jpg" alt="Canopy of trees over a quiet residential road"></div>
+      </div>
+      <div class="duo-text">
+        <h3 class="h-md rv">The right home, <em>in the right community.</em></h3>
+        <div class="pillars">
+          <div class="rv d1"><h4>Neighborhood insight</h4><p>Honest perspective on each area’s character, amenities and long-term outlook.</p></div>
+          <div class="rv d2"><h4>Off-market access</h4><p>Quiet introductions to homes that never reach the open market.</p></div>
+          <div class="rv d3"><h4>Trusted network</h4><p>Lenders, inspectors, designers and movers Melanee knows and trusts.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec testi" style="background:var(--sand)">
+    <div class="wrap">
+      <div class="eyebrow rv">Client Stories</div>
+      <h2 class="h-lg rv d1">In their <em>words</em></h2>
+      <div class="tq">“</div>
+      <div class="tslides" id="tslides">
+        <div class="tslide on"><blockquote>Space reserved for a genuine client testimonial — a few heartfelt sentences about working with Melanee will appear here.</blockquote><div class="who">Client Name &nbsp;·&nbsp; Purchased in Neighborhood</div><span class="placeholder-note">Placeholder — replace with verified client feedback</span></div>
+        <div class="tslide"><blockquote>Space reserved for a genuine seller testimonial — describing the experience of preparing, listing and selling their home.</blockquote><div class="who">Client Name &nbsp;·&nbsp; Sold in Neighborhood</div><span class="placeholder-note">Placeholder — replace with verified client feedback</span></div>
+        <div class="tslide"><blockquote>Space reserved for a genuine client testimonial — perhaps a relocation or first-home story in the client’s own voice.</blockquote><div class="who">Client Name &nbsp;·&nbsp; Relocated to Neighborhood</div><span class="placeholder-note">Placeholder — replace with verified client feedback</span></div>
+      </div>
+      <div class="tdots" id="tdots"><button class="on" aria-label="Testimonial 1"></button><button aria-label="Testimonial 2"></button><button aria-label="Testimonial 3"></button></div>
+    </div>
+  </section>
+
+  <section class="sec contact">
+    <div class="wrap cgrid">
+      <div>
+        <div class="eyebrow rv">Begin the Conversation</div>
+        <h2 class="h-lg rv d1">Let’s find your <em>next home.</em></h2>
+        <p class="lead rv d2">Whether you’re ready to move or simply curious about the market, Melanee would love to hear from you. Expect a personal reply within one business day.</p>
+        <div class="cinfo rv d3">
+          <div><small>Email</small><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c9c4cdcdcee1ccc4cdc0cfc4c48fc2cecc">[email&#160;protected]</a></div>
+          <div><small>Phone</small>(000) 000-0000</div>
+          <div><small>Office</small>Office address placeholder</div>
+        </div>
+      </div>
+      <div class="rv d2" data-formwrap>
+        <form class="form" novalidate>
+          <div class="field"><input name="name" placeholder=" " required><label>Name</label><span class="em">Required</span></div>
+          <div class="field"><input name="email" type="email" placeholder=" " required><label>Email</label><span class="em">Valid email required</span></div>
+          <div class="field full"><input name="phone" type="tel" placeholder=" "><label>Phone Number</label></div>
+          <div class="full chips" role="group" aria-label="I'm interested in">
+            <label><input type="checkbox" name="i" value="buying"><span>Buying</span></label>
+            <label><input type="checkbox" name="i" value="selling"><span>Selling</span></label>
+            <label><input type="checkbox" name="i" value="consult"><span>Consultation</span></label>
+          </div>
+          <div class="field full"><textarea name="message" placeholder=" " required></textarea><label>Message</label><span class="em">Required</span></div>
+          <div class="full"><button class="btn light" type="submit">Send Inquiry <span class="arrow"></span></button></div>
+        </form>
+        <div class="ok"><div class="eyebrow">Thank you</div><h3>Your message is on its way.</h3><p style="opacity:.7">Melanee will be in touch personally within one business day.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= ABOUT ================= -->
+<main class="page" data-page="about" data-screen-label="About Melanee">
+  <section class="about-hero sec" style="padding-bottom:clamp(60px,8vw,120px)">
+    <div class="wrap ab-grid">
+      <div>
+        <div class="eyebrow rv">About Melanee</div>
+        <h1 class="h-xl rv d1">A quieter, more <em>personal</em> way to move.</h1>
+        <p class="lead rv d2">Melanee founded her practice on a simple belief: that buying or selling a home is one of life’s most meaningful decisions, and it deserves an advisor who treats it that way.</p>
+        <p class="lead rv d2" style="margin-top:18px">She pairs an eye for architecture and design with a deep understanding of local markets — and, above all, a commitment to listening. Her clients come to her for expertise, and stay for the relationship.</p>
+        <div style="margin-top:40px" class="rv d3"><a class="btn" data-go="contact">Work with Melanee <span class="arrow"></span></a></div>
+      </div>
+      <div class="ph imgrv rv d1"><img src="img/c16.jpg" alt="Portrait of Melanee"></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap statement rv"><p>“I don’t measure success by the number of homes I sell, but by how my clients feel <em>when they walk through their front door.</em>”</p><div class="eyebrow" style="margin-top:30px">— Melanee</div></div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sechead"><div><div class="eyebrow rv">Her Approach</div><h2 class="h-lg rv d1">Guided by <em>three principles</em></h2></div></div>
+      <div class="values">
+        <div class="rv"><span class="n">i.</span><h3>Listen first</h3><p>Every search and sale begins with understanding your priorities, timing and the life you want to build.</p></div>
+        <div class="rv d1"><span class="n">ii.</span><h3>Advise honestly</h3><p>Clear, candid counsel — even when it isn’t what you expected to hear. Your interests always come first.</p></div>
+        <div class="rv d2"><span class="n">iii.</span><h3>Care for every detail</h3><p>From presentation to paperwork to closing day, nothing is left to chance and nothing is rushed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="ph imgrv rv"><img src="img/c7.jpg" alt="Open-plan modern living room with fireplace and garden views"></div>
+    <div class="txt">
+      <div class="eyebrow rv">Beyond the Transaction</div>
+      <h2 class="h-md rv d1">Rooted in <em>community</em></h2>
+      <p class="rv d2" style="color:var(--ink-2)">Melanee lives and works in the neighborhoods she represents. She knows which streets glow in autumn, which cafés open earliest, and which homes have stories worth telling.</p>
+      <p class="rv d2" style="color:var(--ink-2)">That local fluency — paired with a trusted circle of lenders, inspectors, stagers and designers — makes every move smoother.</p>
+      <div style="margin-top:34px" class="rv d3"><a class="link" data-go="properties">See Current Properties <span class="arrow"></span></a></div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= PROPERTIES ================= -->
+<main class="page" data-page="properties" data-screen-label="Properties">
+  <section class="shero">
+    <div class="bg"><img src="img/c4.jpg" alt="Modern mountain home with reflecting pools at dusk"></div>
+    <div class="shade"></div>
+    <div class="wrap"><div class="eyebrow light">Properties</div><h1 class="h-xl">Curated <em>residences</em></h1></div>
+  </section>
+  <section class="sec">
+    <div class="wrap">
+      <div class="filters">
+        <div class="ftabs" id="ftabs">
+          <button class="on" data-f="all">All</button>
+          <button data-f="For Sale">For Sale</button>
+          <button data-f="New Listing">New Listing</button>
+          <button data-f="Sold">Sold</button>
+        </div>
+        <div class="fsel">
+          <span class="count" id="count"></span>
+          <label>Sort&nbsp;
+            <select id="sort"><option value="feat">Featured</option><option value="hi">Price · High to Low</option><option value="lo">Price · Low to High</option><option value="beds">Bedrooms</option></select>
+          </label>
+        </div>
+      </div>
+      <div class="grid3" id="allList"></div>
+    </div>
+  </section>
+  <section class="sec band">
+    <div class="wrap">
+      <div class="eyebrow rv">Private Search</div>
+      <h2 class="h-lg rv d1">Not seeing <em>quite the right home?</em></h2>
+      <p class="lead rv d2" style="margin:0 auto 36px">Many of the finest homes change hands quietly. Share what you’re looking for and Melanee will search on your behalf — including off-market opportunities.</p>
+      <a class="btn rv d3" data-go="contact">Start a Private Search <span class="arrow"></span></a>
+    </div>
+  </section>
+</main>
+
+<!-- ================= BUYING ================= -->
+<main class="page" data-page="buying" data-screen-label="Buying">
+  <section class="shero">
+    <div class="bg"><img src="img/c11.jpg" alt="Light-filled living room opening to a terrace"></div>
+    <div class="shade"></div>
+    <div class="wrap"><div class="eyebrow light">Buying</div><h1 class="h-xl">Find the home <em>that fits your life.</em></h1></div>
+  </section>
+  <section class="sec">
+    <div class="wrap val-wrap">
+      <div><div class="eyebrow rv">For Buyers</div><h2 class="h-lg rv d1" style="margin-top:18px">A search shaped <em>around you</em></h2></div>
+      <div><p class="lead rv d1">Buying a home should feel exciting, not overwhelming. Melanee brings structure to the search, perspective to every showing and steady advocacy at the negotiating table — so you can focus on imagining your life in your new home.</p></div>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap process">
+      <div class="step rv"><span class="n">01</span><h3>Discovery conversation</h3><p>We talk about how you live, what you love, your must-haves and your timeline — and build a clear brief together.</p></div>
+      <div class="step rv"><span class="n">02</span><h3>Financing &amp; preparation</h3><p>Introductions to trusted lenders and a clear picture of your budget, so you can act decisively when the right home appears.</p></div>
+      <div class="step rv"><span class="n">03</span><h3>The curated search</h3><p>Hand-picked listings, off-market introductions and private tours — with candid notes on every property.</p></div>
+      <div class="step rv"><span class="n">04</span><h3>Offer &amp; negotiation</h3><p>Data-informed pricing strategy and calm, skilled negotiation to secure the home on the best possible terms.</p></div>
+      <div class="step rv"><span class="n">05</span><h3>Closing &amp; beyond</h3><p>Inspections, paperwork and every last detail managed through to the keys — and support well after you move in.</p></div>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sechead"><div><div class="eyebrow rv">What Buyers Value</div><h2 class="h-lg rv d1">Beyond the <em>listing</em></h2></div></div>
+      <div class="feature3">
+        <div class="rv"><div class="ph imgrv"><img src="img/c10.jpg" alt="Tree-lined neighborhood"></div><h3>Neighborhood tours</h3><p>Explore areas with someone who knows them by heart — from schools to weekend markets.</p></div>
+        <div class="rv d1"><div class="ph imgrv"><img src="img/c8.jpg" alt="Marble kitchen detail"></div><h3>A trained eye</h3><p>Honest perspective on layout, quality, and potential — the things photos never show.</p></div>
+        <div class="rv d2"><div class="ph imgrv"><img src="img/c3.jpg" alt="Contemporary home exterior in timber"></div><h3>Early access</h3><p>Be first to hear about new and off-market homes that match your brief.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="sec band">
+    <div class="wrap"><div class="eyebrow rv">Ready when you are</div><h2 class="h-lg rv d1">Let’s begin <em>your search.</em></h2><a class="btn rv d2" data-go="contact">Schedule a Buyer Consultation <span class="arrow"></span></a></div>
+  </section>
+</main>
+
+<!-- ================= SELLING ================= -->
+<main class="page" data-page="selling" data-screen-label="Selling">
+  <section class="shero">
+    <div class="bg"><img src="img/c7.jpg" alt="Elegantly staged open-plan living space"></div>
+    <div class="shade"></div>
+    <div class="wrap"><div class="eyebrow light">Selling</div><h1 class="h-xl">Present your home <em>beautifully.</em></h1></div>
+  </section>
+  <section class="sec">
+    <div class="wrap val-wrap">
+      <div><div class="eyebrow rv">For Sellers</div><h2 class="h-lg rv d1" style="margin-top:18px">Every home has a story. <em>Let’s tell it well.</em></h2></div>
+      <div><p class="lead rv d1">Melanee combines strategic pricing with editorial presentation — professional photography, considered staging and targeted marketing — to reach the right buyers and achieve the strongest result, with as little disruption to your life as possible.</p></div>
+    </div>
+  </section>
+  <section class="split">
+    <div class="ph imgrv rv"><img src="img/c15.jpg" alt="Styled neutral living room with pendant lights"></div>
+    <div class="txt">
+      <div class="eyebrow rv">The Melanee Method</div>
+      <h2 class="h-md rv d1">Preparation, <em>presentation,</em> positioning</h2>
+      <p class="rv d2" style="color:var(--ink-2)">From pre-listing improvements and styling advice to magazine-quality imagery and a launch plan tailored to your property, every element is designed to make buyers fall in love.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap process">
+      <div class="step rv"><span class="n">01</span><h3>Valuation &amp; strategy</h3><p>An in-depth review of your home and the market, and a clear pricing and timing recommendation.</p></div>
+      <div class="step rv"><span class="n">02</span><h3>Preparation &amp; styling</h3><p>Guidance on repairs, refreshes and staging — coordinated with trusted local specialists.</p></div>
+      <div class="step rv"><span class="n">03</span><h3>Editorial marketing</h3><p>Professional photography, film and print, distributed to qualified buyers and agent networks.</p></div>
+      <div class="step rv"><span class="n">04</span><h3>Showings &amp; negotiation</h3><p>Every inquiry handled personally, every offer reviewed in depth, and terms negotiated in your favour.</p></div>
+      <div class="step rv"><span class="n">05</span><h3>Closing with care</h3><p>A smooth path to closing, with every document and deadline managed on your behalf.</p></div>
+    </div>
+  </section>
+  <section class="sec" style="background:var(--sand)">
+    <div class="wrap val-wrap">
+      <div>
+        <div class="eyebrow rv">Home Valuation</div>
+        <h2 class="h-lg rv d1" style="margin:18px 0 24px">What is your home <em>worth today?</em></h2>
+        <p class="lead rv d2">Request a complimentary, no-obligation valuation. Melanee will prepare a personal market analysis for your property.</p>
+      </div>
+      <div class="rv d1 light-form" data-formwrap>
+        <form class="form" novalidate>
+          <div class="field full"><input name="address" placeholder=" " required><label>Property Address</label><span class="em">Required</span></div>
+          <div class="field"><input name="name" placeholder=" " required><label>Name</label><span class="em">Required</span></div>
+          <div class="field"><input name="email" type="email" placeholder=" " required><label>Email</label><span class="em">Valid email required</span></div>
+          <div class="field"><input name="phone" type="tel" placeholder=" "><label>Phone Number</label></div>
+          <div class="field"><select name="timeline"><option>Within 3 months</option><option>3–6 months</option><option>6–12 months</option><option>Just curious</option></select><label>Timeline</label></div>
+          <div class="full"><button class="btn" type="submit">Request Valuation <span class="arrow"></span></button></div>
+        </form>
+        <div class="ok"><div class="eyebrow">Thank you</div><h3>Request received.</h3><p style="color:var(--ink-2)">Melanee will be in touch shortly to arrange your valuation.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= CONTACT ================= -->
+<main class="page" data-page="contact" data-screen-label="Contact">
+  <section class="cp sec">
+    <div class="wrap cp-grid">
+      <div>
+        <div class="eyebrow rv">Contact</div>
+        <h1 class="h-xl rv d1">Let’s find your <em>next home.</em></h1>
+        <p class="lead rv d2">Tell Melanee a little about what you’re looking for — she’ll reply personally within one business day.</p>
+        <div class="cinfo rv d3">
+          <div><small>Email</small><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="432b262f2f2c032e262f222d26266d202c2e">[email&#160;protected]</a></div>
+          <div><small>Phone</small>(000) 000-0000</div>
+          <div><small>Office</small>Office address placeholder</div>
+          <div><small>Hours</small>By appointment, seven days a week</div>
+        </div>
+        <div class="ph imgrv rv"><img src="img/c2.jpg" alt="Low stone residence set into a natural landscape"></div>
+      </div>
+      <div class="rv d1 light-form" data-formwrap style="padding-top:clamp(0px,4vw,60px)">
+        <form class="form" novalidate>
+          <div class="field"><input name="name" placeholder=" " required><label>Name</label><span class="em">Required</span></div>
+          <div class="field"><input name="email" type="email" placeholder=" " required><label>Email</label><span class="em">Valid email required</span></div>
+          <div class="field full"><input name="phone" type="tel" placeholder=" "><label>Phone Number</label></div>
+          <div class="full chips" role="group" aria-label="I'm interested in">
+            <label><input type="checkbox" name="i" value="buying"><span>Buying</span></label>
+            <label><input type="checkbox" name="i" value="selling"><span>Selling</span></label>
+            <label><input type="checkbox" name="i" value="consult"><span>Consultation</span></label>
+            <label><input type="checkbox" name="i" value="other"><span>Something else</span></label>
+          </div>
+          <div class="field full"><textarea name="message" placeholder=" " required></textarea><label>Message</label><span class="em">Required</span></div>
+          <div class="full"><button class="btn" type="submit">Send Message <span class="arrow"></span></button></div>
+        </form>
+        <div class="ok"><div class="eyebrow">Thank you</div><h3>Your message is on its way.</h3><p style="color:var(--ink-2)">Melanee will be in touch personally within one business day.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" data-go="home"><b>MELANEE</b><small>Real Estate</small></a>
+        <p class="blurb">Boutique real estate advisory for buyers and sellers of distinctive homes.</p>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="5" r="2"/><path d="M11 9h4v2a4 4 0 0 1 6 3v7h-4v-6a2 2 0 0 0-4 0v6h-2z"/></svg></a>
+        </div>
+      </div>
+      <div><h5>Explore</h5><ul><li><a data-go="home">Home</a></li><li><a data-go="about">About Melanee</a></li><li><a data-go="properties">Properties</a></li></ul></div>
+      <div><h5>Services</h5><ul><li><a data-go="buying">Buying</a></li><li><a data-go="selling">Selling</a></li><li><a data-go="contact">Contact</a></li></ul></div>
+      <div><h5>Contact</h5><ul><li><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d45484141426d4048414c434848034e4240">[email&#160;protected]</a></li><li>(000) 000-0000</li><li>Office address placeholder</li><li>License # placeholder</li></ul></div>
+    </div>
+    <div class="bigmark">MELANEE</div>
+    <div class="fbot"><span>© <span id="yr"></span> Melanee Real Estate. All rights reserved.</span><span>Equal Housing Opportunity &nbsp;·&nbsp; Privacy &nbsp;·&nbsp; Accessibility</span></div>
+  </div>
+</footer>
+
+<!-- property detail -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Property details">
+  <div class="mbar"><div class="wrap"><a class="logo" style="color:var(--ink)"><b>MELANEE</b><small>Real Estate</small></a><button class="mclose" id="mx">Close <span style="font-size:16px">✕</span></button></div></div>
+  <div class="wrap" id="mcontent"></div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const P=[
+ {id:'ridgeline',name:'The Ridgeline Residence',loc:'Hillside Estates',price:4850000,beds:5,baths:6,sqft:6200,lot:'1.2 acres',status:'For Sale',img:'img/c1.jpg',gal:['img/c11.jpg','img/c13.jpg'],
+  desc:'Set above landscaped lawns with long views to the hills, this contemporary residence pairs warm stone and timber with walls of glass. Interiors flow effortlessly to terraces, a heated pool and garden rooms designed for entertaining at every scale.',
+  feat:['Heated infinity-edge pool','Chef’s kitchen with stone island','Primary suite with private terrace','Wine room & media lounge','Three-car garage','Mature landscaped grounds']},
+ {id:'aspen',name:'Reflecting Pool House',loc:'Canyon Reserve',price:6900000,beds:6,baths:7,sqft:7400,lot:'2.4 acres',status:'New Listing',img:'img/c4.jpg',gal:['img/c7.jpg','img/c15.jpg'],
+  desc:'An architectural statement framed by mountains, with twin reflecting pools, cantilevered rooflines and expansive glazing that captures the light from dawn to dusk.',
+  feat:['Twin reflecting pools','Floor-to-ceiling glazing','Guest pavilion','Indoor–outdoor kitchen','Radiant heated floors','Panoramic mountain views']},
+ {id:'stone',name:'Meadow Stone House',loc:'The Highlands',price:3250000,beds:4,baths:4,sqft:4100,lot:'3.1 acres',status:'For Sale',img:'img/c2.jpg',gal:['img/c6.jpg','img/c8.jpg'],
+  desc:'Low and quietly confident, this stone residence settles into its native meadow landscape. Deep window reveals frame the scenery while calm, natural interiors invite slower living.',
+  feat:['Hand-laid stone façade','Native meadow landscaping','Library with window seat','Vaulted great room','Study & studio','Solar-ready roof']},
+ {id:'canopy',name:'Garden Canopy Estate',loc:'Oakwood Valley',price:5400000,beds:5,baths:5,sqft:5800,lot:'1.8 acres',status:'New Listing',img:'img/c12.jpg',gal:['img/c15.jpg','img/c11.jpg'],
+  desc:'Wrapped in mature gardens and golden evening light, this timber-clad estate offers a rare balance of privacy and connection — with sweeping lawns, winding paths and generous living spaces.',
+  feat:['Timber and glass architecture','Sculpted garden paths','Sunset terrace','Formal & casual dining','Home office suite','Detached studio']},
+ {id:'timber',name:'The Courtyard House',loc:'Westbrook',price:2750000,beds:4,baths:3,sqft:3600,lot:'0.6 acres',status:'Sold',img:'img/c3.jpg',gal:['img/c6.jpg','img/c13.jpg'],
+  desc:'A serene courtyard home in textured timber, arranged around a private garden. Every room enjoys natural light and a connection to the outdoors.',
+  feat:['Central courtyard garden','Textured timber cladding','Open kitchen & dining','Clerestory windows','Mudroom & laundry','Low-maintenance landscaping']},
+ {id:'skyline',name:'Pool Terrace Villa',loc:'Lakeview Heights',price:3950000,beds:4,baths:5,sqft:4600,lot:'0.9 acres',status:'For Sale',img:'img/c5.jpg',gal:['img/c7.jpg','img/c8.jpg'],
+  desc:'Crisp white lines and sun-washed terraces define this modern villa, where a sculptural pool steps down toward open views and endless summer afternoons.',
+  feat:['Sculptural plunge pool','Wraparound terraces','Open-plan living','Guest suite with separate entry','Outdoor shower','Smart home systems']}
+];
+const fmt=n=>'$'+n.toLocaleString('en-US');
+const card=p=>`<article class="card rv" data-id="${p.id}" tabindex="0">
+  <div class="ph"><img loading="lazy" src="${p.img}" alt="${p.name}, ${p.loc}"><span class="badge">${p.status}</span><div class="view"><span>View Property</span><span class="arrow"></span></div></div>
+  <div class="meta"><div class="loc">${p.loc}</div><h3>${p.name}</h3>
+  <div class="row"><span class="price">${p.status==='Sold'?'Sold':fmt(p.price)}</span><span class="specs"><span>${p.beds} Beds</span><span>${p.baths} Baths</span><span>${p.sqft.toLocaleString()} Sq Ft</span></span></div></div></article>`;
+
+document.getElementById('featured').innerHTML=P.filter(p=>p.status!=='Sold').slice(0,3).map(card).join('');
+let filt='all',srt='feat';
+function renderList(){
+  let L=P.filter(p=>filt==='all'||p.status===filt);
+  if(srt==='hi')L=[...L].sort((a,b)=>b.price-a.price);
+  if(srt==='lo')L=[...L].sort((a,b)=>a.price-b.price);
+  if(srt==='beds')L=[...L].sort((a,b)=>b.beds-a.beds);
+  const el=document.getElementById('allList');
+  el.innerHTML=L.length?L.map(card).join(''):'<div class="empty">No properties in this category right now.</div>';
+  document.getElementById('count').textContent=L.length+(L.length===1?' residence':' residences');
+  observe(el);
+}
+document.getElementById('ftabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filt=b.dataset.f;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));renderList()});
+document.getElementById('sort').addEventListener('change',e=>{srt=e.target.value;renderList()});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+function observe(root){root.querySelectorAll('.rv,.imgrv').forEach(el=>{el.classList.remove('in');io.observe(el)})}
+
+/* routing */
+const pages=[...document.querySelectorAll('.page')];
+const hdr=document.getElementById('hdr');
+function go(name,push=true){
+  if(!pages.some(p=>p.dataset.page===name))name='home';
+  pages.forEach(p=>p.classList.toggle('on',p.dataset.page===name));
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('on',a.dataset.go===name));
+  closeMenu();closeModal();
+  window.scrollTo({top:0,behavior:'instant'});
+  const pg=pages.find(p=>p.dataset.page===name);
+  hdr.dataset.over=pg.querySelector('.hero,.shero')?'1':'0';
+  onScroll();observe(pg);
+  if(name==='properties')renderList();
+  const titles={home:'Melanee | Real Estate — Finding Your Place in the World',about:'About Melanee | Real Estate',properties:'Properties | Melanee Real Estate',buying:'Buying a Home | Melanee Real Estate',selling:'Selling Your Home | Melanee Real Estate',contact:'Contact | Melanee Real Estate'};
+  document.title=titles[name];
+  if(push)history.replaceState(null,'','#'+name);
+  try{localStorage.setItem('melanee-page',name)}catch(e){}
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
+  const c=e.target.closest('.card');if(c){openModal(c.dataset.id)}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('card'))openModal(e.target.dataset.id);if(e.key==='Escape'){closeModal();closeMenu()}});
+window.addEventListener('hashchange',()=>go(location.hash.slice(1),false));
+
+/* header + parallax */
+function onScroll(){
+  const y=scrollY;
+  hdr.classList.toggle('solid',hdr.dataset.over==='0'||y>60);
+  document.querySelectorAll('.page.on [data-parallax]').forEach(el=>{const r=el.parentElement.getBoundingClientRect();el.style.transform=`translateY(${(r.top+r.height/2-innerHeight/2)*-0.12}px)`});
+}
+addEventListener('scroll',onScroll,{passive:true});
+
+/* mobile menu */
+const mnav=document.getElementById('mnav');
+function closeMenu(){mnav.classList.remove('open')}
+document.getElementById('burger').onclick=()=>mnav.classList.add('open');
+document.getElementById('mclose').onclick=closeMenu;
+
+/* services */
+const svcItems=[...document.querySelectorAll('.svc-item')],svcImgs=[...document.querySelectorAll('#svcImg img')];
+svcItems.forEach(it=>{const f=()=>{svcItems.forEach(x=>x.classList.toggle('on',x===it));svcImgs.forEach((im,i)=>im.classList.toggle('on',i==it.dataset.i))};it.addEventListener('click',f);it.addEventListener('mouseenter',()=>{if(matchMedia('(hover:hover)').matches)f()})});
+
+/* testimonials */
+const ts=[...document.querySelectorAll('.tslide')],td=[...document.querySelectorAll('#tdots button')];let ti=0;
+function showT(i){ti=i;ts.forEach((s,k)=>s.classList.toggle('on',k===i));td.forEach((d,k)=>d.classList.toggle('on',k===i))}
+td.forEach((d,i)=>d.onclick=()=>showT(i));
+setInterval(()=>showT((ti+1)%ts.length),7000);
+
+/* forms */
+function wireForm(wrap){
+  const f=wrap.querySelector('form');
+  f.addEventListener('submit',e=>{
+    e.preventDefault();let ok=true;
+    f.querySelectorAll('[required]').forEach(inp=>{
+      const v=inp.value.trim();const bad=!v||(inp.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      inp.closest('.field').classList.toggle('err',bad);if(bad)ok=false;
+    });
+    if(!ok)return;
+    const btn=f.querySelector('[type=submit]');btn.disabled=true;btn.style.opacity=.6;
+    setTimeout(()=>{wrap.classList.add('sent');f.reset();btn.disabled=false;btn.style.opacity=1},700);
+  });
+  f.querySelectorAll('[required]').forEach(i=>i.addEventListener('input',()=>i.closest('.field').classList.remove('err')));
+}
+
+/* modal */
+const modal=document.getElementById('modal');
+function openModal(id){
+  const p=P.find(x=>x.id===id);if(!p)return;
+  document.getElementById('mcontent').innerHTML=`
+   <div class="gal"><div><img src="${p.img}" alt="${p.name}"></div><div><img src="${p.gal[0]}" alt="${p.name} interior"></div><div><img src="${p.gal[1]}" alt="${p.name} interior"></div></div>
+   <div class="mbody">
+    <div>
+      <div class="eyebrow">${p.status} &nbsp;·&nbsp; ${p.loc}</div>
+      <h2 class="h-lg">${p.name}</h2>
+      <div class="mprice">${p.status==='Sold'?'Sold':fmt(p.price)}</div>
+      <div class="mspecs"><div><b>${p.beds}</b><small>Bedrooms</small></div><div><b>${p.baths}</b><small>Bathrooms</small></div><div><b>${p.sqft.toLocaleString()}</b><small>Sq Ft</small></div><div><b>${p.lot}</b><small>Lot</small></div></div>
+      <p class="lead" style="max-width:62ch">${p.desc}</p>
+      <h3 class="h-md" style="margin-top:56px">Features</h3>
+      <ul class="mfeat">${p.feat.map(f=>`<li>${f}</li>`).join('')}</ul>
+    </div>
+    <aside class="aside light-form" data-formwrap>
+      <div class="agent"><div class="av"><img src="img/c9.jpg" alt="Melanee"></div><div><b>Melanee</b><span style="font-size:13px;color:var(--mute)">Your advisor for this home</span></div></div>
+      <form class="form" novalidate>
+        <div class="field"><input name="name" placeholder=" " required><label>Name</label><span class="em">Required</span></div>
+        <div class="field"><input name="email" type="email" placeholder=" " required><label>Email</label><span class="em">Valid email required</span></div>
+        <div class="field"><input name="phone" type="tel" placeholder=" "><label>Phone Number</label></div>
+        <div class="field"><textarea name="message" placeholder=" " required>I’d like to learn more about ${p.name}.</textarea><label>Message</label><span class="em">Required</span></div>
+        <button class="btn" type="submit">Request a Private Showing</button>
+      </form>
+      <div class="ok" style="padding:20px 0"><div class="eyebrow">Thank you</div><h3 style="font-size:34px">Request received.</h3><p style="color:var(--ink-2)">Melanee will be in touch to arrange your showing.</p></div>
+    </aside>
+   </div>`;
+  wireForm(modal.querySelector('[data-formwrap]'));
+  modal.scrollTop=0;modal.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('mx').onclick=closeModal;
+
+document.querySelectorAll('[data-formwrap]').forEach(wireForm);
+document.getElementById('yr').textContent=new Date().getFullYear();
+let start=location.hash.slice(1);
+if(!start){try{start=localStorage.getItem('melanee-page')}catch(e){}}
+go(start||'home');
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
